@@ -19,7 +19,7 @@ pos = nx.spring_layout(G)
 nx.draw_networkx_nodes(G, pos)
 nx.draw_networkx_edges(G, pos)
 nx.draw_networkx_labels(G, pos)
-plt.show()
+# plt.show()
 
 # Generating the Reward Matrix #
 
@@ -88,7 +88,7 @@ def update(current_state, action, gamma):
 
     ### Updating the reward for an action taken in the current state
     Q[current_state, action] = R[current_state, action] + gamma * max_value
-    print('max value', R[current_state, action] + gamma * max_value)
+    # print('max value', R[current_state, action] + gamma * max_value)
     
     if np.max(Q) > 0:
         return np.sum(Q/np.max(Q)*100)
@@ -107,7 +107,7 @@ for i in range(700):
     action = sample_next_action(available_act)
     score = update(current_state, action, gamma)
     scores.append(score)
-    print('Score', str(score))
+    # print('Score', str(score))
 
 print("Trained Q matrix: ")
 print(Q/np.max(Q)*100)
@@ -141,5 +141,5 @@ while current_state != goal:
 print("Most efficient path:")
 print(steps)
 
-plt.plot(scores)
-plt.show()
+# plt.plot(scores)
+# plt.show()
