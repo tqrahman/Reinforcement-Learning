@@ -160,14 +160,25 @@ for episode in range(1000):
 
     while not is_terminal_state(row_index, column_index):
         
+        # Gets the action 
         action_index = get_next_action(row_index, column_index, epsilon)
+
+        # Saves the old row and index
         old_row_index, old_column_index = row_index, column_index
+        
+        # Gets the new state by taking that action
         row_index, column_index = get_next_location(row_index, column_index, action_index)
 
+        # Gets the current reward 
         reward = rewards[row_index, column_index]
+
+        # Gets the current Q-value of the state
         old_q_value = Q_table[old_row_index, old_column_index, action_index]
+
+        # Calculates the temporal difference given the reward, discount factor, the next Q-value after the action is taken, and the current Q-value
         temporal_difference = reward + (discount_factor * np.max(Q_table[row_index, column_index]) - old_q_value)
 
+        # Updates the current Q-value with the new one
         new_q_value = old_q_value + (learning_rate * temporal_difference)
         Q_table[old_row_index, old_column_index, action_index] = new_q_value
 
@@ -175,14 +186,14 @@ print("COMPLETE!")
 
 # Finding the shortest paths given three different starting positions
 
-## Starting location (3,9)
-print("Starting Location (3,9): ")
-print(get_shortest_path(3, 9))
+## Starting location (7,3)
+print("Starting Location (7,3): ")
+print(get_shortest_path(7, 3))
 
 ## Starting location (5,0)
 print("Starting Location (5,0): ")
 print(get_shortest_path(5, 0))
 
-## Starting location (9,5)
-print("Starting Location (9,5): ")
-print(get_shortest_path(9, 5))
+## Starting location (9,7)
+print("Starting Location (9,7): ")
+print(get_shortest_path(9, 7))
